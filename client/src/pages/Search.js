@@ -99,23 +99,29 @@ class Books extends Component {
         </Container>
         <br />
         
-        {(this.state.searchedBooks.length !== 0) ? (
-          <BooksList>
-            {this.state.books.map(books => (
-              <BooksListItem 
-                key={this.state.searchedBooks.items[0].etag}
-                title = {this.state.searchedBooks.items[0].volumeInfo.title}
-                description = {this.state.searchedBooks.items[0].volumeInfo.description}
-                authors = {this.state.searchedBooks.items[0].volumeInfo.authors}
-                URL = {this.state.searchedBooks.items[0].volumeInfo.previewLink}
-                thumbnail = {this.state.searchedBooks.items[0].volumeInfo.imageLinks.smallThumbnail}
-              >
-              </BooksListItem>
-            ))}
-          </BooksList>
-          ) : (
-          <h3>No Results to Display</h3>
-        )}
+        <Container fluid>
+          <Jumbotron>
+            {(this.state.searchedBooks.length !== 0) ? (
+              <BooksList>
+                {this.state.books.map(books => (
+                  <BooksListItem 
+                    key={this.state.searchedBooks.items[0].etag}
+                    title = {this.state.searchedBooks.items[0].volumeInfo.title}
+                    description = {this.state.searchedBooks.items[0].volumeInfo.description}
+                    authors = {this.state.searchedBooks.items[0].volumeInfo.authors}
+                    URL = {this.state.searchedBooks.items[0].volumeInfo.previewLink}
+                    thumbnail = {this.state.searchedBooks.items[0].volumeInfo.imageLinks.smallThumbnail}
+                  >
+                  </BooksListItem>
+                ))}
+              </BooksList>
+              ) : (
+              <h3 align="left">No Results to Display</h3>
+            )}
+        <br />
+        </Jumbotron>
+        </Container>
+
       </div>
     );
   }
