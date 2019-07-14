@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
 import { Container } from "../components/Grid"; //Col, Row, 
+import { Input, FormBtn } from "../components/Form"; //TextArea,
 // import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+// import { Link } from "react-router-dom";
+// import DeleteBtn from "../components/DeleteBtn";
 
 class Books extends Component {
   state = {
@@ -57,14 +57,9 @@ class Books extends Component {
     return (
       <div>
         <Container fluid>
-          <div>
-            hello world
-          </div>
-        </Container>
-        <Container fluid>
           <Jumbotron>
-            <h1>What Books Should I Read?</h1>
-          </Jumbotron>
+          <h3 align="left">Book Search</h3>
+          <br />
           <form>
             <Input
               value={this.state.title}
@@ -72,25 +67,25 @@ class Books extends Component {
               name="title"
               placeholder="Title (required)"
             />
-            <Input
-              value={this.state.author}
-              onChange={this.handleInputChange}
-              name="author"
-              placeholder="Author (required)"
-            />
-            <TextArea
-              value={this.state.synopsis}
-              onChange={this.handleInputChange}
-              name="synopsis"
-              placeholder="Synopsis (Optional)"
-            />
             <FormBtn
               disabled={!(this.state.author && this.state.title)}
               onClick={this.handleFormSubmit}
             >
-              Submit Book
+              Search
             </FormBtn>
           </form>
+          <br />
+          <br />
+          <br />
+          </Jumbotron>
+        </Container>
+        <br />
+        <Container fluid>
+          <div style={{ clear: "both", border: "solid 2px" }} >
+              Results
+            <br />
+
+          </div>
         </Container>
       </div>
     );
@@ -98,3 +93,37 @@ class Books extends Component {
 }
 
 export default Books;
+
+// <Container fluid>
+//   <div>
+//     hello world
+//   </div>
+// </Container>
+
+// <Input
+// value={this.state.author}
+// onChange={this.handleInputChange}
+// name="author"
+// placeholder="Author (required)"
+// />
+// <TextArea
+// value={this.state.synopsis}
+// onChange={this.handleInputChange}
+// name="synopsis"
+// placeholder="Synopsis (Optional)"
+// />
+
+// <form>
+// <Input
+//   value={this.state.title}
+//   onChange={this.handleInputChange}
+//   name="title"
+//   placeholder="Title (required)"
+// />
+// <FormBtn
+//   disabled={!(this.state.author && this.state.title)}
+//   onClick={this.handleFormSubmit}
+// >
+//   Submit Book
+// </FormBtn>
+// </form>
