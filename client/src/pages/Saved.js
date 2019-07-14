@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Container } from "../components/Grid"; //Col, Row,
+import {  BooksList, BooksListItem } from "../components/DisplayBooks"; 
 // import Thumbnail from "../components/Thumbnail";
 // import { List, ListItem } from "../components/List";
 // import { Input, TextArea, FormBtn } from "../components/Form";
@@ -61,8 +62,18 @@ class Books extends Component {
           <Jumbotron>
           <h3 align="left">Saved Books</h3>
           <br />
-            
-          <br />
+          <BooksList>
+          {this.state.books.map(book => (
+            <BooksListItem
+              title = {book.title}
+              description = {book.synopsis}
+              authors = {book.author}
+              URL = {book.link}
+              thumbnail = {book.image}
+              deleteBook = {this.deleteBook}
+            />
+            ))}
+          </BooksList>
           <br />
           <br />
           </Jumbotron>

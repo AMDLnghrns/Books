@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { Container } from "../components/Grid"; //Col, Row, 
 import { Input, FormBtn } from "../components/Form"; //TextArea,
 import axios from "axios";
+// import DisplayBooks from "../components/DisplayBooks";
+import {  BooksList, BooksListItem } from "../components/DisplayBooks"; 
 // import { List, ListItem } from "../components/List";
 // import { Link } from "react-router-dom";
 // import DeleteBtn from "../components/DeleteBtn";
@@ -19,6 +21,10 @@ class Books extends Component {
   };
 
   componentDidMount() {
+    // axios.get("https://www.googleapis.com/books/v1/volumes?q=the+hunger+games")
+    // .then(res => {
+    //   this.setState({ searchedBooks: res.data });
+    // }).catch(err => console.log(err));
     this.loadBooks();
   }
 
@@ -51,13 +57,6 @@ class Books extends Component {
       console.log(this.state.searchedBooks);
     }).catch(err => console.log(err));
   }
-
-      // console.log(response.data.items[0].volumeInfo.title) // Title
-      // console.log(response.data.items[0].volumeInfo.authors) // authors
-      // console.log(response.data.items[0].volumeInfo.description) // description
-      // console.log(response.data.items[0].volumeInfo.imageLinks.smallThumbnail) // image
-      // console.log(response.data.items[0].volumeInfo.previewLink) // link
-
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -96,20 +95,27 @@ class Books extends Component {
           <br />
           <br />
           <br />
-          </Jumbotron>
+          </Jumbotron>  
         </Container>
         <br />
-        <Container fluid>
-          <div style={{ clear: "both", border: "solid 2px" }} >
-              Results
-            <br />
-
-            
-
-
-
-          </div>
-        </Container>
+        
+        {(this.state.searchedBooks.length !== 0) ? (
+          <BooksList>
+            {this.state.books.map(books => (
+              <BooksListItem 
+                key={this.state.searchedBooks.items[0].etag}
+                title = {this.state.searchedBooks.items[0].volumeInfo.title}
+                description = {this.state.searchedBooks.items[0].volumeInfo.description}
+                authors = {this.state.searchedBooks.items[0].volumeInfo.authors}
+                URL = {this.state.searchedBooks.items[0].volumeInfo.previewLink}
+                thumbnail = {this.state.searchedBooks.items[0].volumeInfo.imageLinks.smallThumbnail}
+              >
+              </BooksListItem>
+            ))}
+          </BooksList>
+          ) : (
+          <h3>No Results to Display</h3>
+        )}
       </div>
     );
   }
@@ -117,11 +123,13 @@ class Books extends Component {
 
 export default Books;
 
-// <Container fluid>
-//   <div>
-//     hello world
-//   </div>
-// </Container>
+
+
+
+
+// if searchedBooks is not null, display (<BooksList> <BooksListItem /> </BooksList>) else display "Please search a book."
+
+
 
 // <Input
 // value={this.state.author}
