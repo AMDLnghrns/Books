@@ -3,6 +3,7 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Container } from "../components/Grid"; //Col, Row, 
 import { Input, FormBtn } from "../components/Form"; //TextArea,
+import axios from "axios";
 // import { List, ListItem } from "../components/List";
 // import { Link } from "react-router-dom";
 // import DeleteBtn from "../components/DeleteBtn";
@@ -12,7 +13,9 @@ class Books extends Component {
     books: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "",
+    searchRequest: "",
+    searchedBooks: []
   };
 
   componentDidMount() {
@@ -40,6 +43,22 @@ class Books extends Component {
     });
   };
 
+  handleSearchFormSubmit = event => {
+    event.preventDefault(); 
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + this.state.searchRequest)
+    .then(res => {
+      this.setState({ searchedBooks: res.data });
+      console.log(this.state.searchedBooks);
+    }).catch(err => console.log(err));
+  }
+
+      // console.log(response.data.items[0].volumeInfo.title) // Title
+      // console.log(response.data.items[0].volumeInfo.authors) // authors
+      // console.log(response.data.items[0].volumeInfo.description) // description
+      // console.log(response.data.items[0].volumeInfo.imageLinks.smallThumbnail) // image
+      // console.log(response.data.items[0].volumeInfo.previewLink) // link
+
+
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.author) {
@@ -62,14 +81,14 @@ class Books extends Component {
           <br />
           <form>
             <Input
-              value={this.state.title}
+              name= "searchRequest"
+              value={this.state.searchRequest}
               onChange={this.handleInputChange}
-              name="title"
               placeholder="Title (required)"
             />
             <FormBtn
-              disabled={!(this.state.author && this.state.title)}
-              onClick={this.handleFormSubmit}
+              // disabled={!(this.state.author && this.state.title)}
+              onClick={this.handleSearchFormSubmit}
             >
               Search
             </FormBtn>
@@ -84,6 +103,10 @@ class Books extends Component {
           <div style={{ clear: "both", border: "solid 2px" }} >
               Results
             <br />
+
+            
+
+
 
           </div>
         </Container>
