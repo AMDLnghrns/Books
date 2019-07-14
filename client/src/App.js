@@ -1,30 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Search from "./pages/Search";
-import Saved from "./pages/Saved";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import NavBar from "./components/Nav";
-import Title from "./components/Title";
+import Search from "./pages/Search/Search.js";
+import Results from "./pages/Results/Results.js";
+import Saved from "./pages/Saved/Saved.js";
+import NoMatch from "./pages/NoMatch/NoMatch.js";
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <NavBar />
-        <Title />
-        <Switch>
-          <Route exact path = "/" component = {Search} />
-          <Route exact path = "/search" component = {Search} />
-          <Route exact path = "/books/:id" component = {Detail} />
-          <Route exact path = "/saved" component = {Saved} />
-          <Route component = {NoMatch} />
-        </Switch>
-      </div>
-    </Router>
-  );
-}
+const App = () => (
+  <Router>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Search} />
+        <Route exact path="/results" component={Results} />
+        <Route exact path="/saved" component={Saved} />
+        <Route component={NoMatch} />
+      </Switch>
+    </div>
+  </Router>
+);
 
 export default App;
-
 

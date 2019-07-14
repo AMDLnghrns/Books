@@ -1,13 +1,13 @@
 import React from "react";
 
-function Jumbotron({ children }) {
-  return (
-    <div style={{ clear: "both", textAlign: "center", border: "solid 2px" }} >
+const Jumbotron = ({ children }) => (
+  <div className="jumbotron jumbotron-fluid">
+    <div 
+      style={{ height: 150, clear: "both", paddingTop: 10, paddingBottom: 20, textAlign: "Center"}}
+      className="container">
       {children}
     </div>
-  );
-}
+  </div>
+);
 
 export default Jumbotron;
-
-//<div style={{ clear: "both", textAlign: "center" }} className="jumbotron">
